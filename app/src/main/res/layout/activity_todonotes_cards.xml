@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/cardView_layout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/myCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dimen_10dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="@dimen/dimen_5dp"
+        >
+
+<LinearLayout
+    android:id="@+id/linearLayoutNoteItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:transitionName="@string/custom_transition"
+    >
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:id="@+id/pin"
+            android:src="@drawable/pin_push"
+            android:layout_gravity="right"
+            android:visibility="invisible"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/title_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/content_TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="10"
+            android:ellipsize="end"
+            android:textColor="#0e0e0e"
+            android:textSize="20sp"
+            android:alpha="0.45"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:layout_marginStart="@dimen/dimen_10dp"
+            />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:weightSum="10"
+        android:layout_margin="@dimen/dimen_10dp"
+        >
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/date_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="12sp"
+            android:alpha="0.54"
+            tools:text="asdasdas"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:drawableStart="@drawable/ic_clock"
+            android:drawablePadding="@dimen/dimen_10dp"
+            android:paddingStart="@dimen/dimen_10dp"
+            android:paddingLeft="@dimen/dimen_10dp"
+            android:paddingRight="@dimen/dimen_10dp"
+            android:paddingEnd="@dimen/dimen_10dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:background="#d3d3d3"
+            android:layout_alignParentLeft="true"
+            />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/time_TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        android:alpha="0.54"
+        tools:text="asdasdas"
+        android:layout_toRightOf="@+id/date_TextView"
+        android:textStyle="bold"
+        android:visibility="gone"
+        />
+        <android.support.v7.widget.AppCompatCheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/checkBox"
+            android:layout_alignParentRight="true"
+            android:visibility="invisible"
+            />
+
+    </RelativeLayout>
+</LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

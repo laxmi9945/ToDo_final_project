@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:clickable="true">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="@dimen/about_img_width"
+        android:layout_height="@dimen/about_img_width"
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center"
+        android:src="@drawable/mann" />
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/tv"
+        android:text="@string/developer_name"
+        android:layout_marginTop="20dp"
+        android:textStyle="italic|bold"/>
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/mobNo"
+        android:text="@string/developer_mob"
+        android:layout_marginTop="2dp"
+        android:textStyle="italic|bold"/>
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/emailId"
+        android:text="@string/developer_email"
+        android:layout_marginTop="2dp"
+        android:textStyle="italic|bold"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="copyrights &#169; Bridgelabz Solutions LLP"
+        android:layout_marginTop="145dp"
+        android:textStyle="italic"
+       />
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_home_footer">
+    </com.google.android.gms.ads.AdView>
+
+</LinearLayout>

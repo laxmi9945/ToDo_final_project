@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.app.todo" >
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <permission
+        android:name="com.app.todo.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.app.todo.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/notes_app_logo"
+        android:roundIcon="@drawable/notes_app_logo"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:screenOrientation="portrait"
+        android:windowSoftInputMode="adjustPan">
+        <activity android:name=".todoMain.view.activity.SplashActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".login.view.LoginActivity"
+        />
+
+        <activity android:name=".todoMain.view.activity.TodoMainActivity"
+
+            android:theme="@style/homeTheme"
+            android:label="@string/notes"
+            android:windowSoftInputMode="adjustPan"
+            android:launchMode="singleTop"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable">
+            </meta-data>
+        </activity>
+
+        <activity android:name=".registration.view.RegistrationActivity"  />
+        <activity android:name=".resetPassword.view.ResetPasswordActivity"/>
+        <activity android:name=".notesadd.view.NotesAddActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".notesedit.view.NotesEditActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="1e0275c993a7b60bb8eb5521e71b464821743311" />
+        <activity android:name=".todoMain.view.activity.ReminderNotifyActivity"/>
+        <service android:name=".todoMain.view.notificationManager.NotifyService"/>
+        <service android:name=".todoMain.view.notificationManager.ScheduleService"/>
+    </application>
+
+</manifest>
