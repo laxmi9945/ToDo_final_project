@@ -76,7 +76,6 @@ dependencies {
     //compile 'com.firebaseui:firebase-ui-auth:0.6.0'
     compile 'com.firebaseui:firebase-ui-storage:0.6.0'
     compile 'com.google.android.gms:play-services-ads:10.0.1'
-
 }
 
 apply plugin: 'com.google.gms.google-services'
