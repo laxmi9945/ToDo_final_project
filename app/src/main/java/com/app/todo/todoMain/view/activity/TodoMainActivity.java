@@ -60,6 +60,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -80,7 +81,8 @@ import io.fabric.sdk.android.Fabric;
 
 //import com.bumptech.glide.Glide;
 
-public class TodoMainActivity extends BaseActivity implements TodoMainActivityInterface, SearchView.OnQueryTextListener, View.OnClickListener,
+public class TodoMainActivity extends BaseActivity implements TodoMainActivityInterface,
+        SearchView.OnQueryTextListener, View.OnClickListener,
         NavigationView.OnNavigationItemSelectedListener, NoteseditFragmentInterface {
     static final String TAG = "NetworkStateReceiver";
     private final int PICK_IMAGE_CAMERA = 100, PICK_IMAGE_GALLERY = 200, CROP_IMAGE = 1;
@@ -91,7 +93,7 @@ public class TodoMainActivity extends BaseActivity implements TodoMainActivityIn
     SharedPreferences.Editor editor;
     CardView cardView;
     DrawerLayout drawer;
-    Toolbar toolbar,delete_ToolBar;
+    Toolbar toolbar, delete_ToolBar;
     NavigationView navigationView;
     Menu menu;
     DataBaseUtility dataBaseUtility;
@@ -127,16 +129,17 @@ public class TodoMainActivity extends BaseActivity implements TodoMainActivityIn
     FirebaseUser firebaseUser;
     Bitmap bitmap;
     ArchiveFragment archiveFragment;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Fabric.with(this, new Crashlytics());
 //        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-        try{
+        try {
             FirebaseDatabase.getInstance().setPersistenceEnabled(true);
-            Log.d(TAG,FirebaseDatabase.getInstance().toString());
-        }catch (Exception e){
-            Log.w(TAG,"SetPresistenceEnabled:Fail"+FirebaseDatabase.getInstance().toString());
+            Log.d(TAG, FirebaseDatabase.getInstance().toString());
+        } catch (Exception e) {
+            Log.w(TAG, "SetPresistenceEnabled:Fail" + FirebaseDatabase.getInstance().toString());
             e.printStackTrace();
         }
         setContentView(R.layout.activity_drawerlayout);
@@ -165,8 +168,8 @@ public class TodoMainActivity extends BaseActivity implements TodoMainActivityIn
         } else {
 
             String uEmail = firebaseUser.getEmail();
-            String uName=uEmail.substring(0, uEmail.lastIndexOf("@"));
-            String uName2=uName.substring(0,1).toUpperCase() + uName.substring(1).toLowerCase();
+            String uName = uEmail.substring(0, uEmail.lastIndexOf("@"));
+            String uName2 = uName.substring(0, 1).toUpperCase() + uName.substring(1).toLowerCase();
             nav_header_Name.setText(uName2);
             nav_header_Email.setText(uEmail);
             circleImageView.setOnClickListener(this);
@@ -215,7 +218,7 @@ public class TodoMainActivity extends BaseActivity implements TodoMainActivityIn
         //Getting reference to Firebase DatabaseUtil
         databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://mytodoapp-1d9b3.firebaseio.com/").child(getString(R.string.userData));
         databaseReference.keepSynced(true);*/
-        databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://mytodoapp-1d9b3.firebaseio.com/").child(getString(R.string.userData));
+        databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://my-note-3ae97.firebaseio.com/").child(getString(R.string.userData));
         databaseReference.keepSynced(true);
         firebaseAuth = FirebaseAuth.getInstance();
         uId = firebaseAuth.getCurrentUser().getUid();
@@ -234,8 +237,8 @@ public class TodoMainActivity extends BaseActivity implements TodoMainActivityIn
         nav_header_Name = (AppCompatTextView) header.findViewById(R.id.nav_header_appName);
         nav_header_Email = (AppCompatTextView) header.findViewById(R.id.nav_header_emailId);
         circleImageView = (CircleImageView) header.findViewById(R.id.profile_image);
-        firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
-        delete_ToolBar= (Toolbar) findViewById(R.id.deleteToolbar);
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        delete_ToolBar = (Toolbar) findViewById(R.id.deleteToolbar);
         setSupportActionBar(toolbar);
 
 
@@ -574,7 +577,7 @@ public class TodoMainActivity extends BaseActivity implements TodoMainActivityIn
 
             getFragmentManager().popBackStack();
         }
-        if(toolbar.getVisibility()!=View.VISIBLE){
+        if (toolbar.getVisibility() != View.VISIBLE) {
             delete_ToolBar.setVisibility(View.GONE);
             toolbar.setVisibility(View.VISIBLE);
         }
@@ -588,13 +591,13 @@ public class TodoMainActivity extends BaseActivity implements TodoMainActivityIn
             floatingActionButton.setVisibility(View.GONE);
         }
     }
-    public void showOrHideToolBar(boolean show){
-        if(show){
+
+    public void showOrHideToolBar(boolean show) {
+        if (show) {
             toolbar.setVisibility(View.VISIBLE);
             delete_ToolBar.setVisibility(View.INVISIBLE);
 
-        }
-        else {
+        } else {
             delete_ToolBar.setVisibility(View.VISIBLE);
             toolbar.setVisibility(View.INVISIBLE);
         }
@@ -674,14 +677,17 @@ public class TodoMainActivity extends BaseActivity implements TodoMainActivityIn
 
         if (uri != null) {
             String uEmail = firebaseUser.getEmail();
-            String uName=uEmail.substring(0, uEmail.lastIndexOf("@"));
-            StorageReference riversRef = storageReference.child("images/"+uName+".jpg");
+            String uName = uEmail.substring(0, uEmail.lastIndexOf("@"));
+            StorageReference riversRef = storageReference.child("images/" + uName + ".jpg");
             riversRef.putFile(uri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            @SuppressWarnings("VisibleForTests") Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                            Log.i(TAG, "onSuccess: "+downloadUrl);
+                           /* Task<Uri> urlTask = taskSnapshot.getStorage().getDownloadUrl();
+                            while (!urlTask.isSuccessful()) ;
+                            Uri downloadUrl = urlTask.getResult();*/
+                            @SuppressWarnings("VisibleForTests") Task<Uri> downloadUrl = taskSnapshot.getStorage().getDownloadUrl();
+                            Log.i(TAG, "onSuccess: " + downloadUrl);
                             //downloadUrl2=downloadUrl;
                             FirebaseDatabase.getInstance().getReference().child("userProfilePic").setValue(String.valueOf(downloadUrl));
                             Glide.with(TodoMainActivity.this)
@@ -704,17 +710,18 @@ public class TodoMainActivity extends BaseActivity implements TodoMainActivityIn
             //TODo display error Toast
         }
     }
+
     private void downloadImage() {
         File localFile = null;
         String uEmail = firebaseUser.getEmail();
-        String uName=uEmail.substring(0, uEmail.lastIndexOf("@"));
+        String uName = uEmail.substring(0, uEmail.lastIndexOf("@"));
         try {
             localFile = File.createTempFile("images", "jpg");
         } catch (IOException e) {
             e.printStackTrace();
         }
         final File finalLocalFile = localFile;
-        StorageReference mReference=storageReference.child("images/"+uName+".jpg");
+        StorageReference mReference = storageReference.child("images/" + uName + ".jpg");
         mReference.getFile(localFile)
                 .addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                     @Override

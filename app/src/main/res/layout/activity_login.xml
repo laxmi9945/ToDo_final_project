@@ -1,156 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/Linear_rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:id="@+id/Linear_rootLayout"
+    android:background="@drawable/login_gradient"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    android:background="@drawable/login_gradient"
-    >
+    android:gravity="center"
+    android:orientation="vertical">
 
     <FrameLayout
+        android:id="@+id/login_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/login_frame"
-        android:visibility="gone"
         android:background="@android:color/black"
-        />
+        android:visibility="gone" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"
         android:scrollbarThumbVertical="@null"
-        >
-    <LinearLayout
-        android:id="@+id/linearMain"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="@dimen/dimen_10dp"
-        >
+        android:scrollbars="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        >
+        <LinearLayout
+            android:id="@+id/linearMain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/dimen_10dp">
 
-        <android.support.v7.widget.AppCompatImageView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
 
-            android:layout_width="@dimen/imageview_width_100dp"
-            android:layout_height="@dimen/imageview_width_100dp"
-            android:layout_gravity="center"
-            android:src="@drawable/login_note" />
+                <android.support.v7.widget.AppCompatImageView
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/emailLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        >
-    <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/email_Edittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:hint="@string/enter_Email"
-        android:imeActionId="@+id/PasswordEditText"
-        android:inputType="textEmailAddress"
-        android:maxLines="1"
-        android:padding="@dimen/padding"
+                    android:layout_width="@dimen/imageview_width_100dp"
+                    android:layout_height="@dimen/imageview_width_100dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/login_note" />
 
-        />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/passwordLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true"
-        app:passwordToggleEnabled = "true"
-        app:passwordToggleTint="@color/colorRed"
-        app:passwordToggleDrawable="@android:drawable/ic_menu_view"
-        >
-    <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/password_Edittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:hint="@string/enter_password"
-        android:inputType="textPassword"
-        android:maxLines="1"
-        android:padding="@dimen/padding"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/emailLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-        />
-    </android.support.design.widget.TextInputLayout>
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/email_Edittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:hint="@string/enter_Email"
+                        android:inputType="textEmailAddress"
+                        android:maxLines="1"
+                        android:padding="@dimen/padding"
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/forgot_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="@dimen/layout_marginTop"
-        android:text="@string/password_forgot" />
+                        />
+                </android.support.design.widget.TextInputLayout>
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/login_button"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_marginLeft="@dimen/login_btn_marigin"
-        android:layout_marginRight="@dimen/login_btn_marigin"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/loginbtn"
-        android:text="@string/login_button"
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/passwordLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/md_grey_500">
 
-        android:textAllCaps="false" />
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/password_Edittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:hint="@string/enter_password"
+                        android:inputType="textPassword"
+                        android:maxLines="1"
+                        android:padding="@dimen/padding"
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/createAccount_Textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/register_textView"
-        android:textAlignment="center"
-        android:textSize="15dp" />
+                        />
+                </android.support.design.widget.TextInputLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="vertical"
-        >
-        <com.facebook.login.widget.LoginButton
-            android:layout_width="250dp"
-            android:layout_height="@dimen/google_btn_height"
-            android:layout_gravity="center"
-            android:id="@+id/fb_login_button"
-            >
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/forgot_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="@dimen/layout_marginTop"
+                    android:text="@string/password_forgot" />
 
-        </com.facebook.login.widget.LoginButton>
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/login_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="@dimen/login_btn_marigin"
+                    android:layout_marginRight="@dimen/login_btn_marigin"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/loginbtn"
+                    android:text="@string/login_button"
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/google_button"
-            android:layout_width="250dp"
-            android:layout_gravity="center"
-            android:layout_height="@dimen/google_btn_height"
-            android:layout_marginTop="@dimen/google_btn_marigin_top"
-            android:background="@drawable/google_button"
-            android:text="  G+         Login with G+"
-            android:textSize="15dp"
-            android:textColor="#fbfcfcfc"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:layout_marginBottom="10dp"
-            />
-    </LinearLayout>
-    </LinearLayout>
-    </LinearLayout>
+                    android:textAllCaps="false" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/createAccount_Textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@string/register_textView"
+                    android:textAlignment="center"
+                    android:textSize="15dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <com.facebook.login.widget.LoginButton
+                        android:id="@+id/fb_login_button"
+                        android:layout_width="250dp"
+                        android:layout_height="@dimen/google_btn_height"
+                        android:layout_gravity="center">
+
+                    </com.facebook.login.widget.LoginButton>
+
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/google_button"
+                        android:layout_width="250dp"
+                        android:layout_height="@dimen/google_btn_height"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="@dimen/google_btn_marigin_top"
+                        android:background="@drawable/google_button"
+                        android:text="  G+         Login with G+"
+                        android:textAlignment="textStart"
+                        android:textAllCaps="false"
+                        android:textColor="#fbfcfcfc"
+                        android:textSize="15dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
 
     </ScrollView>
 

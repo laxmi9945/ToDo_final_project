@@ -53,6 +53,7 @@ public class LoginInterActor implements LoginInterActorInterface  {
 
                     AlertDialog dialog = builder.create();
                     dialog.show();
+                    dialog.setCanceledOnTouchOutside(false);
                 }
             }
         });

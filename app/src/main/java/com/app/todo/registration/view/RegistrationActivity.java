@@ -29,6 +29,7 @@ import com.app.todo.utils.Constants;
 import com.crashlytics.android.Crashlytics;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -381,7 +382,7 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            @SuppressWarnings("VisibleForTests") Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                            @SuppressWarnings("VisibleForTests") Task<Uri> downloadUrl = taskSnapshot.getStorage().getDownloadUrl();
                             Log.i(TAG, "onSuccess: "+downloadUrl);
 
                             /*Glide.with(TodoMainActivity.this)

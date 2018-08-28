@@ -3,9 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/dggd"
     android:orientation="vertical"
-
     android:weightSum="1">
 
     <android.support.v7.widget.AppCompatImageView
@@ -13,6 +11,7 @@
         android:layout_width="@dimen/splash_imageView_width"
         android:layout_height="@dimen/splash_imageView_width"
         android:layout_gravity="center"
+        android:visibility="gone"
         android:src="@drawable/bridgelabz"
         android:layout_weight="0.5"
         />
@@ -21,10 +20,10 @@
         android:id="@+id/appCompatTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_gravity="bottom"
         android:textSize="@dimen/splash_textView_size"
         android:gravity="bottom"
+        android:visibility="gone"
         android:layout_marginBottom="30dp"
         android:text="@string/splash_welcome_message"
         android:textAlignment="center"

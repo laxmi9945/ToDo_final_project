@@ -73,7 +73,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityInterfac
     CallbackManager callbackManager;
     LoginButton loginButton;
     SharedPreferences sharedPreferences;
-    GoogleSignInOptions  googleSignInOptions;
+    GoogleSignInOptions googleSignInOptions;
     GoogleApiClient googleApiClient;
     int RC_SIGN_IN = 100; //to check the activity result
     LoginPresenter loginPresenter;
@@ -81,6 +81,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityInterfac
     private LinearLayout linearLayout;
     private LinearLayout linearMain;
     FrameLayout frameLayout;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,8 +108,8 @@ public class LoginActivity extends BaseActivity implements LoginActivityInterfac
         if (CommonChecker.isNetworkConnected(LoginActivity.this)) {
 
         } else {
-             snackbar = Snackbar
-                    .make(linearLayout,getString(R.string.no_internet), Snackbar.LENGTH_LONG)
+            snackbar = Snackbar
+                    .make(linearLayout, getString(R.string.no_internet), Snackbar.LENGTH_LONG)
                     .setAction(getString(R.string.retry), new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -139,7 +140,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityInterfac
     @Override
     public void initView() {
 
-        frameLayout= (FrameLayout) findViewById(R.id.login_frame);
+        frameLayout = (FrameLayout) findViewById(R.id.login_frame);
         editTextEmail = (AppCompatEditText) findViewById(R.id.email_Edittext);
         editTextPassword = (AppCompatEditText) findViewById(R.id.password_Edittext);
         createAccountTextview = (AppCompatTextView) findViewById(R.id.createAccount_Textview);
@@ -147,8 +148,8 @@ public class LoginActivity extends BaseActivity implements LoginActivityInterfac
         login_Button = (AppCompatButton) findViewById(R.id.login_button);
         loginButton = (LoginButton) findViewById(R.id.fb_login_button);
         googleButton = (AppCompatButton) findViewById(R.id.google_button);
-        linearLayout= (LinearLayout) findViewById(R.id.Linear_rootLayout);
-        linearMain= (LinearLayout) findViewById(R.id.linearMain);
+        linearLayout = (LinearLayout) findViewById(R.id.Linear_rootLayout);
+        linearMain = (LinearLayout) findViewById(R.id.linearMain);
         //initializing google signin options
         googleSignInOptions = new GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -166,7 +167,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityInterfac
                 .build();
 
         setClicklistener();
-        loginPresenter=new LoginPresenter(this,this);
+        loginPresenter = new LoginPresenter(this, this);
 
         Typeface custom_font = Typeface.createFromAsset(getAssets(),
                 "fonts/HelveticaNeue-Regular.ttf");
@@ -184,7 +185,6 @@ public class LoginActivity extends BaseActivity implements LoginActivityInterfac
         googleButton.setOnClickListener(this);
 
     }
-
 
 
     // [START on_start_check_user]
@@ -205,7 +205,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityInterfac
                 Intent intent = new Intent(this, RegistrationActivity.class);
                 Bundle bundle = ActivityOptionsCompat.makeCustomAnimation(this,
                         android.R.anim.fade_in, android.R.anim.fade_out).toBundle();
-                startActivity(intent,bundle);
+                startActivity(intent, bundle);
                 break;
 
             case R.id.forgot_textview:
@@ -214,7 +214,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityInterfac
                 Intent intent2 = new Intent(this, ResetPasswordActivity.class);
                 Bundle bundle2 = ActivityOptionsCompat.makeCustomAnimation(this,
                         android.R.anim.fade_in, android.R.anim.fade_out).toBundle();
-                startActivity(intent2,bundle2);
+                startActivity(intent2, bundle2);
                 break;
 
             case R.id.login_button:
@@ -241,7 +241,6 @@ public class LoginActivity extends BaseActivity implements LoginActivityInterfac
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-
     //Facebook Social Login
 
     private void facebookLogin() {
@@ -258,34 +257,34 @@ public class LoginActivity extends BaseActivity implements LoginActivityInterfac
                 GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(),
                         new GraphRequest.GraphJSONObjectCallback() {
 
-                    @Override
+                            @Override
 
-                    public void onCompleted(JSONObject object, GraphResponse response) {
+                            public void onCompleted(JSONObject object, GraphResponse response) {
 
-                        // Get facebook data from login
+                                // Get facebook data from login
 
-                        Bundle bFacebookData = getFacebookData(object);
+                                Bundle bFacebookData = getFacebookData(object);
 
-                        String emailid = bFacebookData.getString(Constants.fb_email);
-                        editor.putString(Constants.fb_email_key, emailid);
-                        editor.putString(Constants.fb_profile_key, bFacebookData
-                                .getString(Constants.fb_profile_pic));
-                        editor.putString(Constants.fb_name_key, bFacebookData
-                                .getString(Constants.fb_first_name));
-                        editor.putString(Constants.fb_lastname_key, bFacebookData
-                                .getString(Constants.fb_last_name));
-                        editor.apply();
-                        linearMain.setVisibility(View.GONE);
-                        frameLayout.setVisibility(View.VISIBLE);
-                        progressDialog.setMessage(getString(R.string.wait_logging_in));
-                        progressDialog.show();
+                                String emailid = bFacebookData.getString(Constants.fb_email);
+                                editor.putString(Constants.fb_email_key, emailid);
+                                editor.putString(Constants.fb_profile_key, bFacebookData
+                                        .getString(Constants.fb_profile_pic));
+                                editor.putString(Constants.fb_name_key, bFacebookData
+                                        .getString(Constants.fb_first_name));
+                                editor.putString(Constants.fb_lastname_key, bFacebookData
+                                        .getString(Constants.fb_last_name));
+                                editor.apply();
+                                linearMain.setVisibility(View.GONE);
+                                frameLayout.setVisibility(View.VISIBLE);
+                                progressDialog.setMessage(getString(R.string.wait_logging_in));
+                                progressDialog.show();
+                                progressDialog.setCanceledOnTouchOutside(false);
+                                Toast.makeText(LoginActivity.this, getString(R.string.welcome) + bFacebookData
+                                        .getString(Constants.fb_first_name), Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(LoginActivity.this, getString(R.string.welcome) + bFacebookData
-                                .getString(Constants.fb_first_name), Toast.LENGTH_SHORT).show();
+                            }
 
-                    }
-
-                });
+                        });
 
                 Bundle parameters = new Bundle();
 
@@ -301,7 +300,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityInterfac
 
             public void onCancel() {
                 linearMain.setVisibility(View.VISIBLE);
-                Toast.makeText(LoginActivity.this,getString(R.string.login_attempt_warn), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, getString(R.string.login_attempt_warn), Toast.LENGTH_SHORT).show();
 
             }
 
@@ -330,7 +329,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityInterfac
 
                             startActivity(new Intent(getApplicationContext(), TodoMainActivity.class));
 
-                            sharedPreferences.edit().putBoolean(Constants.key_fb_login,true).apply();
+                            sharedPreferences.edit().putBoolean(Constants.key_fb_login, true).apply();
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
@@ -342,6 +341,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityInterfac
                     }
                 });
     }
+
     private Bundle getFacebookData(JSONObject object) {
 
         try {
@@ -349,7 +349,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityInterfac
             Bundle bundle = new Bundle();
 
             String id = object.getString("id");
-            Log.i("fb", "getFacebookData: "+id.toString());
+            Log.i("fb", "getFacebookData: " + id.toString());
             try {
 
                 URL profile_pic = new URL("http://graph.facebook.com/" + id + "/picture?type=square");
@@ -388,8 +388,6 @@ public class LoginActivity extends BaseActivity implements LoginActivityInterfac
 
     }
 
-
-
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -409,17 +407,17 @@ public class LoginActivity extends BaseActivity implements LoginActivityInterfac
 
             // Google Sign In was successful, authenticate with Firebase
             GoogleSignInAccount account = result.getSignInAccount();
-            String person_name=account.getDisplayName();
-            String person_email=account.getEmail();
-            Uri profile_pic=account.getPhotoUrl();
-            String person_id=account.getId();
+            String person_name = account.getDisplayName();
+            String person_email = account.getEmail();
+            Uri profile_pic = account.getPhotoUrl();
+            String person_id = account.getId();
             sharedPreferences = getApplicationContext().getSharedPreferences(Constants.keys,
                     Context.MODE_PRIVATE);
             editor = sharedPreferences.edit();
-            editor.putString(Constants.Name,person_name);
-            editor.putString(Constants.Email,person_email);
-            editor.putString(Constants.id,person_id);
-            editor.putString(Constants.profile_pic,profile_pic.toString());
+            editor.putString(Constants.Name, person_name);
+            editor.putString(Constants.Email, person_email);
+            editor.putString(Constants.id, person_id);
+            editor.putString(Constants.profile_pic, profile_pic.toString());
             editor.apply();
             AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
             firebaseAuth.signInWithCredential(credential)
@@ -432,7 +430,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityInterfac
                                         TodoMainActivity.class));
                                 finish();
                                 sharedPreferences.edit().putBoolean(Constants
-                                        .key_google_login,true).apply();
+                                        .key_google_login, true).apply();
 
                             } else {
                                 Toast.makeText(LoginActivity.this, getString(R.string.auth_failed),
@@ -452,14 +450,14 @@ public class LoginActivity extends BaseActivity implements LoginActivityInterfac
     @Override
     public void loginSuccess(UserInfoModel userInfoModel, String uid) {
         sharedPreferences = getApplicationContext().getSharedPreferences(Constants.keys, Context.MODE_PRIVATE);
-        String login_email=editTextEmail.getText().toString();
-        String login_password=editTextPassword.getText().toString();
-        editor.putString(Constants.Email,login_email);
-        editor.putString(Constants.Password,login_password);
-        editor.putString("uid",uid);
-        sharedPreferences.edit().putBoolean(Constants.key_firebase_login,true).apply();
+        String login_email = editTextEmail.getText().toString();
+        String login_password = editTextPassword.getText().toString();
+        editor.putString(Constants.Email, login_email);
+        editor.putString(Constants.Password, login_password);
+        editor.putString("uid", uid);
+        sharedPreferences.edit().putBoolean(Constants.key_firebase_login, true).apply();
         startActivity(new Intent(getApplicationContext(), TodoMainActivity.class));
-       // startActivity(new Intent(getApplicationContext(), TodoMainActivity.class));
+        // startActivity(new Intent(getApplicationContext(), TodoMainActivity.class));
         finish();
     }
 
@@ -481,7 +479,7 @@ public class LoginActivity extends BaseActivity implements LoginActivityInterfac
 
     @Override
     public void showError(int errorType) {
-        switch (errorType){
+        switch (errorType) {
             case Constants.ErrorType.ERROR_EMPTY_EMAIL:
                 editTextEmail.setError(getString(R.string.email_field_condition));
                 editTextEmail.requestFocus();

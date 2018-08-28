@@ -24,7 +24,7 @@
         android:theme="@style/AppTheme"
         android:screenOrientation="portrait"
         android:windowSoftInputMode="adjustPan">
-        <activity android:name=".todoMain.view.activity.SplashActivity"
+        <activity android:name=".login.view.LoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +32,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.view.LoginActivity"
+        <!--<activity android:name=".login.view.LoginActivity"-->
         />
 
         <activity android:name=".todoMain.view.activity.TodoMainActivity"
